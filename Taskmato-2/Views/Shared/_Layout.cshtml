@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskmato</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/timer.js"></script>
+    <script src="~/Scripts/change-date.js"></script>
+
+    <style>
+        .date-box {
+            background-color: #e6e6e6;
+        }
+
+        .logo {
+            max-width: 70%;
+            height: auto;
+        }
+
+        .logo-sm {
+            max-width: 30%;
+            height: auto;
+        }
+
+        .pomodoro-timer-box {
+            background-color: #e6e6e6;
+        }
+
+        .grey {
+            background-color: #e6e6e6;
+        }
+
+        #task-list {
+            background-color: #e6e6e6;
+        }
+
+        #button-row {
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+
+        #input-row {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .custom-btn {
+            width: 200px !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Taskmato</p>
+        </footer>
+    </div>
+  
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

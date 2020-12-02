@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid">
+                        <img class=" mb-4 mx-auto logo" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+                        <div class="mb-2 px-2 rounded" id="task-list">
+                            <!-- 
+                                 The p below are for demonstration purposes at the
+                                 moment - in the finished product, the idea is to
+                                 create a div for each task in the task list
+                            -->
+                            <p>-Task 1</p>
+                            <p>-Task 2</p>
+                            <p>-Task 3</p>
+                            <p>-Task 4</p>
+                            <p>-Task 5</p>
+                            <p>-Task 6</p>
+                            <p>-Task 7</p>
+                            <p>-Task 8</p>
+                            <p>-Task 9</p>
+                            <p>-Task 10</p>
+                        </div>
+                        <hr class="my-4" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid text-center mb-2">
+                        <a class="btn btn-danger btn-lg pl-4 pr-4" href="#" role="button">Add Task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid rounded text-center mb-3 pomodoro-timer-box">
+                        <h1 class="display-4 pt-4">0:00</h1>
+                        <hr class="my-4">
+                        <div class="pb-4">
+                            <a class="btn btn-success btn-lg pl-5 pr-5" id="start-button" href="#" role="button">Start</a>
+                            <a class="btn btn-danger btn-lg pl-5 pr-5" id="end-button" href="#" role="button">End</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid rounded pt-4 pb-4 date-box">
+                        <div class="display-4 text-center">
+                            <h1>10/24/2020</h1>
+                            <h1>6:49</h1>
+                            <h1>PM</h1>
+                        </div>
+                        <hr class="my-4">
+                        <div class="row">
+                            <div class="col-xs mr-auto ml-2">
+                                <a class="btn btn-lg" id="left-button" href="#" role="button"><</a>
+                            </div>
+                            <div class="col-xs ml-auto mr-2">
+                                <a class="btn btn-lg" id="right-button" href="#" role="button">></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <div class="container-fluid">
+                        <a class="btn btn-lg" href="#" role="button">Save</a>
+                        <a class="btn btn-lg" href="#" role="button">Load</a>
+                    </div>
+                </div>
+                <div class="col-xs">
+                    <div class="container-fluid">
+                        <a class="btn btn-lg" id="options-button" href="#" role="button">Options</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

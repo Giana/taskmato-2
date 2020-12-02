@@ -1,0 +1,64 @@
+﻿@model Taskmato.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <div class="text-center">
+            <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+            <h4>Task Details</h4>
+        </div>
+        <hr>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="row" id="input-row">
+                <div class="col-md mx-3 rounded grey">
+                    <div class="row">
+                        <div class="col form-group text-center">
+                            <p><strong>@Html.DisplayNameFor(model => model.Name)</strong></p>
+                            @Html.DisplayFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group text-center">
+                            <p><strong>@Html.DisplayNameFor(model => model.Details)</strong></p>
+                            @Html.DisplayFor(model => model.Details)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group text-center">
+                            <p><strong>@Html.DisplayNameFor(model => model.Pomodoros)</strong></p>
+                            @Html.DisplayFor(model => model.Pomodoros)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group text-center">
+                            <p><strong>@Html.DisplayNameFor(model => model.Complete)</strong></p>
+                            @Html.DisplayFor(model => model.Complete)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="button-row">
+                <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
+                    <div class="row">
+                        <div class="col form-group">
+                            <div class="container-fluid text-center mt-2">
+                                @Html.ActionLink("Edit", "Edit/" + Model.TaskID, "Task", null, new { id = Model.TaskID, @class = "btn btn-light btn-lg pl-4 pr-4" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <div class="container-fluid text-center my-2">
+                                @Html.ActionLink("Cancel", "Index", "Task", null, new { @class = "btn btn-dark btn-lg pl-4 pr-4" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dl>
+</div>

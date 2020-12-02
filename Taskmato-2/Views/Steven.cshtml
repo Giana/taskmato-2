@@ -1,0 +1,39 @@
+﻿@{
+    var db = Database.Open("Pomodoro");
+    var selectQueryString = "Add Task";
+}
+<html>
+<body>
+    <h1>Task List</h1>
+    <table>
+        <tr>
+            <th>Task</th>
+        </tr>
+        @foreach (var row in db.Query(selectQueryString))
+        {
+            <tr>
+                <td>@row.Task</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>@{
+    var db = Database.Open("Pomodoro");
+    var selectQueryString = "Add Task";
+}
+<html>
+<body>
+    <h1>Task List</h1>
+    <table>
+        <tr>
+            <th>Task</th>
+        </tr>
+        @foreach (var row in db.Query(selectQueryString))
+        {
+            <tr>
+                <td>@row.Task</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

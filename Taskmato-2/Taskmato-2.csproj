@@ -5,4 +5,11 @@
     <RootNamespace>Taskmato_2</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Documentation\" />
+    <Folder Include="Images\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
