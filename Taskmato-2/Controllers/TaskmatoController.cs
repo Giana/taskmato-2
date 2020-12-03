@@ -7,19 +7,17 @@ using System.Linq;
 using System.Net;
 using System.Web;
 //using System.Web.Mvc;
-using Taskmato.DAL;
-using Taskmato.Models;
+using Taskmato_2.Models;
 
-namespace Taskmato.Controllers
+namespace Taskmato_2.Controllers
 {
-    public class TaskController : Controller
+    public class TaskmatoController : Controller
     {
-        private TaskmatoContext db = new TaskmatoContext();
 
         // GET: Task
         public ActionResult Index()
         {
-            return View(db.Tasks.ToList());
+            return View();
         }
 
         /*// GET: Task/Details/5
@@ -51,7 +49,7 @@ namespace Taskmato.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Task task)
+        public ActionResult Create(Models.Taskmato task)
         {
             /*try
             {
@@ -105,7 +103,7 @@ namespace Taskmato.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Task task)
+        public ActionResult Edit(Models.Taskmato task)
         {
             /*if (ModelState.IsValid)
             {

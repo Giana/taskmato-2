@@ -1,25 +1,46 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Taskmato.Models;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+using Taskmato_2.Models;
 
-namespace Taskmato.DAL
+namespace Taskmato_2.Data
 {
-    public class TaskmatoContext : DbContext
+    public class TaskmatoContext : IdentityDbContext
     {
-        public TaskmatoContext() : base("TaskmatoContext")
+        public DbSet<Taskmato> Taskmatos { get; set; }
+        public DbSet<TaskList> TaskLists { get; set; }
+        public DbSet<User> TaskmatoUsers { get; set; }
+
+        public TaskmatoContext(DbContextOptions options)
+            : base(options)
         {
         }
 
-        public DbSet<Task> Tasks { get; set; }
-        public DbSet<TaskList> TaskLists { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(builder);
+
+
+            builder.Entity<Taskmato>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder.Entity<TaskList>()
+                .HasMany(x => x.Taskmatos)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<TaskList>()
+                .Property(x => x.Date)
+                .IsRequired();
+
+            builder.Entity<User>()
+                .HasMany(x => x.TaskLists)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

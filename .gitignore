@@ -339,5 +339,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-/Taskmato-2/appsettings.Secret.json
-/Taskmato-2/appsettings.Secret.Development.json
+/Taskmato-2/appsettings.Secrets.json
+/Taskmato-2/appsettings.Secrets.Development.json

@@ -18,6 +18,19 @@ namespace Taskmato_2
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostContext, builder) =>
+                {
+                    // Development
+                    if(hostContext.HostingEnvironment.IsDevelopment())
+                    {
+                        builder.AddJsonFile("appsettings.Secrets.Development.json", optional: false, reloadOnChange: true);
+                    }
+                    // Deployment
+                    else
+                    {
+                        builder.AddJsonFile("appsettings.Secrets.json", optional: false, reloadOnChange: true);
+                    }
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

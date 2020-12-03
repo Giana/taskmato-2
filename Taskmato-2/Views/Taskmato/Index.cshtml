@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Taskmato.Models.Task>
+﻿@model List<Taskmato_2.Models.Taskmato>
 
 @{
     ViewBag.Title = "Index";
@@ -20,9 +20,9 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.TaskID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.TaskID }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.TaskID })
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.TaskmatoId }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.TaskmatoId }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.TaskmatoId })
                                         </td>
                                     </tr>
                                 }
