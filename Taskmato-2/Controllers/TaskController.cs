@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
+//using System.Data.Entity;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using Taskmato.DAL;
 using Taskmato.Models;
 
@@ -21,10 +22,10 @@ namespace Taskmato.Controllers
             return View(db.Tasks.ToList());
         }
 
-        // GET: Task/Details/5
+        /*// GET: Task/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            *//*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -34,10 +35,10 @@ namespace Taskmato.Controllers
             if (task == null)
             {
                 return HttpNotFound();
-            }
+            }*//*
 
-            return View(task);
-        }
+            //return View(task);
+        }*/
 
         // GET: Task/Create
         public ActionResult Create()
@@ -50,9 +51,9 @@ namespace Taskmato.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TaskID,Name,Details,Pomodoros,Complete")] Task task)
+        public ActionResult Create(Task task)
         {
-            try
+            /*try
             {
                 if (ModelState.IsValid)
                 {
@@ -65,16 +66,16 @@ namespace Taskmato.Controllers
             catch(DataException)
             {
                 ModelState.AddModelError("", "Unable to save changes");
-            }
+            }*/
             
 
             return View(task);
         }
 
         // GET: Task/Edit/5
-        public ActionResult Edit(int? id)
+        /*public ActionResult Edit(int? id)
         {
-            if(id == null)
+            *//*if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -94,33 +95,33 @@ namespace Taskmato.Controllers
                 {
                     ModelState.AddModelError("", "Unable to save changes");
                 }
-            }
+            }*//*
 
-            return View(taskToUpdate);
-        }
+            //return View(taskToUpdate);
+        }*/
 
         // POST: Task/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TaskID,Name,Details,Pomodoros,Complete")] Task task)
+        public ActionResult Edit(Task task)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
                 db.Entry(task).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
-            }
+            }*/
 
             return View(task);
         }
 
         // GET: Task/Delete/5
-        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        /*public ActionResult Delete(int? id, bool? saveChangesError = false)
         {
-            if (id == null)
+            *//*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -135,16 +136,16 @@ namespace Taskmato.Controllers
             if (task == null)
             {
                 return HttpNotFound();
-            }
+            }*//*
 
-            return View(task);
-        }
+            //return View(task);
+        }*/
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            try
+            /*try
             {
                 Task task = db.Tasks.Find(id);
                 db.Tasks.Remove(task);
@@ -153,12 +154,12 @@ namespace Taskmato.Controllers
             catch (DataException)
             {
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
-            }
+            }*/
 
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if(disposing)
             {
@@ -166,6 +167,6 @@ namespace Taskmato.Controllers
             }
 
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
