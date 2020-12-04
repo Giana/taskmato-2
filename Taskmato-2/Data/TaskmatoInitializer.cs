@@ -38,8 +38,7 @@ namespace Taskmato_2.Data
         private async Task InitializeData()
         {
             const string Password = "password";
-            await CreateUser("gianajinx", "giana.jinx@gmail.com", Password);
-            await CreateUser("johndoe", "john.doe@gmail.com", Password);
+            await CreateUser("giana", "giana@giana.dev", Password);
 
             var userGiana = new User
             {
