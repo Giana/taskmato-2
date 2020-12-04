@@ -22,29 +22,38 @@ namespace Taskmato_2.Data.Services
 
         public void AddTaskmato(Taskmato taskmato)
         {
-
+            Taskmatos.Add(taskmato);
         }
 
-        public void EditTaskmato(int taskmatoId, Taskmato taskmato)
+        public void UpdateTaskmato(int oldTaskmatoId, Taskmato newTaskmato)
         {
+            Taskmato OldTaskmato = Taskmatos.FirstOrDefault(x => x.TaskmatoId == oldTaskmatoId);
+            OldTaskmato.Name = newTaskmato.Name;
+            OldTaskmato.Details = newTaskmato.Details;
+            OldTaskmato.Pomodoros = newTaskmato.Pomodoros;
+            OldTaskmato.Complete = newTaskmato.Complete;
 
+            Taskmatos.Update(OldTaskmato);
         }
 
         public void DeleteTaskmato(int taskmatoId)
         {
-
+            Taskmato TaskmatoToDelete = Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId);
+            Taskmatos.Remove(TaskmatoToDelete);
         }
 
-        public Taskmato GetTaskmato(int taskmatoId)
+        public Taskmato RetrieveTaskmato(int taskmatoId)
         {
+            Taskmato TaskmatoToRetrieve = Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId);
 
+            return TaskmatoToRetrieve;
         }
 
         public ICollection<Taskmato> RetrieveTaskmatos(int taskListId)
         {
+            TaskList TaskList = TaskLists.Include(x => x.Taskmatos).FirstOrDefault(x => x.TaskListId == taskListId);
 
+            return TaskList.Taskmatos;
         }
-
-
     }
 }

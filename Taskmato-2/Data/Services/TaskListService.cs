@@ -27,15 +27,15 @@ namespace Taskmato_2.Data.Services
 
         public void DeleteTaskList(int taskListId)
         {
-            TaskList TaskList = TaskLists.FirstOrDefault(x => x.TaskListId == taskListId);
-            TaskLists.Remove(TaskList);
+            TaskList TaskListToDelete = TaskLists.FirstOrDefault(x => x.TaskListId == taskListId);
+            TaskLists.Remove(TaskListToDelete);
         }
 
         public TaskList RetrieveTaskList(int taskListId)
         {
-            TaskList TaskList = TaskLists.Include(x => x.Taskmatos).FirstOrDefault(x => x.TaskListId == taskListId);
+            TaskList TaskListToRetrieve = TaskLists.Include(x => x.Taskmatos).FirstOrDefault(x => x.TaskListId == taskListId);
 
-            return TaskList;
+            return TaskListToRetrieve;
         }
 
         public ICollection<TaskList> RetrieveTaskLists(int userId)
