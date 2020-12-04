@@ -8,163 +8,80 @@ using System.Net;
 using System.Web;
 //using System.Web.Mvc;
 using Taskmato_2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Taskmato_2.Data.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace Taskmato_2.Controllers
 {
+    [Authorize]
     public class TaskmatoController : Controller
     {
+        private ITaskmatoService TaskmatoService;
+        private ITaskListService TaskListService;
+        private IUserService UserService;
+        private UserManager<IdentityUser> UserManager;
 
-        // GET: Task
-        public ActionResult Index()
+        public TaskmatoController(ITaskmatoService taskmatoService, ITaskListService taskListService,
+            IUserService userService, UserManager<IdentityUser> userManager)
+        {
+            TaskmatoService = taskmatoService;
+            TaskListService = taskListService;
+            UserService = userService;
+            UserManager = userManager;
+        }
+
+        public ActionResult Index(int taskListId)
         {
             return View();
         }
 
-        /*// GET: Task/Details/5
         public ActionResult Details(int? id)
         {
-            *//*if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            return View();
+        }
 
-            Task task = db.Tasks.Find(id);
-
-            if (task == null)
-            {
-                return HttpNotFound();
-            }*//*
-
-            //return View(task);
-        }*/
-
-        // GET: Task/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Task/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Models.Taskmato task)
+        public ActionResult Edit(int? id)
         {
-            /*try
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Tasks.Add(task);
-                    db.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-            }
-            catch(DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes");
-            }*/
-            
-
-            return View(task);
+            return View();
         }
 
-        // GET: Task/Edit/5
-        /*public ActionResult Edit(int? id)
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
         {
-            *//*if(id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var taskToUpdate = db.Tasks.Find(id);
-
-            if(TryUpdateModel(taskToUpdate, "",
-               new string[] { "Name", "Details", "Pomodoros", "Complete" }))
-            {
-                try
-                {
-                    db.SaveChanges();
-
-                    return RedirectToAction("Index");
-                }
-                catch(DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes");
-                }
-            }*//*
-
-            //return View(taskToUpdate);
-        }*/
-
-        // POST: Task/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Models.Taskmato task)
-        {
-            /*if (ModelState.IsValid)
-            {
-                db.Entry(task).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
-            }*/
-
-            return View(task);
+            return View();
         }
 
-        // GET: Task/Delete/5
-        /*public ActionResult Delete(int? id, bool? saveChangesError = false)
-        {
-            *//*if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ViewBag.ErrorMessage = "Delete failed";
-            }
-
-            Task task = db.Tasks.Find(id);
-
-            if (task == null)
-            {
-                return HttpNotFound();
-            }*//*
-
-            //return View(task);
-        }*/
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            /*try
-            {
-                Task task = db.Tasks.Find(id);
-                db.Tasks.Remove(task);
-                db.SaveChanges();
-            }
-            catch (DataException)
-            {
-                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
-            }*/
-
             return RedirectToAction("Index");
         }
 
-        /*protected override void Dispose(bool disposing)
+        public User RetrieveCurrentUser()
         {
-            if(disposing)
+            User _User;
+            try
             {
-                db.Dispose();
-            }
+                string Username = User.Identity.Name;
+                
+                if(Username != null)
+                {
+                    _User = UserService.RetrieveUserByUsername(Username);
 
-            base.Dispose(disposing);
-        }*/
+                    return _User;
+                }
+
+                throw new Exception("Could not retrieve user");
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
