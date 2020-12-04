@@ -10,17 +10,20 @@ namespace Taskmato_2.Data
 {
     public class TaskmatoInitializer 
     {
-        private readonly TaskmatoContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private TaskmatoContext Context;
+        private UserManager<IdentityUser> UserManager;
+
         public TaskmatoInitializer(TaskmatoContext context, UserManager<IdentityUser> userManager)
         {
-            this._context = context;
-            this._userManager = userManager;
+            this.Context = context;
+            this.UserManager = userManager;
         }
+
         public async Task InitAsync()
         {
-            _context.Database.EnsureDeleted();
-            if (_context.Database.EnsureCreated())
+            Context.Database.EnsureDeleted();
+
+            if (Context.Database.EnsureCreated())
             {
                 await InitializeData();
 
@@ -31,35 +34,31 @@ namespace Taskmato_2.Data
             }
 
         }
+
         private async Task InitializeData()
         {
-            const string password = "password";
-            await CreateUser("gianajinx", "giana.jinx@gmail.com", password);
-            await CreateUser("johndoe", "john.doe@gmail.com", password);
-            var guser = new User
+            const string Password = "password";
+            await CreateUser("gianajinx", "giana.jinx@gmail.com", Password);
+            await CreateUser("johndoe", "john.doe@gmail.com", Password);
+
+            var userGiana = new User
             {
-                Email = "giana.jinx@gmail.com",
-                Username = "gianajinx"
+                Email = "giana@giana.dev",
+                Username = "giana"
             };
-            _context.TaskmatoUsers.Add(guser);
 
-            _context.TaskmatoUsers.Add(
-                    new User
-                    {
-                        Email = "john.doe@gmail.com",
-                        Username = "johndoe"
-                    });
-
-            InitTasks(guser);
+            Context.TaskmatoUsers.Add(userGiana);
+            InitTasks(userGiana);
         }
         private async Task CreateUser(string username, string email, string password)
         {
-            var user = new IdentityUser { UserName = username, Email = email };
+            var User = new IdentityUser { UserName = username, Email = email };
+
             try
             {
-                await _userManager.CreateAsync(user, password);
+                await UserManager.CreateAsync(User, password);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -67,8 +66,8 @@ namespace Taskmato_2.Data
         }
         protected void InitTasks(User user)
         {
-            var taskList = new TaskList { Date = DateTime.Now };
-            var tasks = new List<Taskmato>
+            var TaskList = new TaskList { Date = DateTime.Now };
+            var Tasks = new List<Taskmato>
             {
             new Models.Taskmato{ Name="Walk the dog", Details="Twice around the block", Pomodoros=0, Complete=false},
             new Models.Taskmato{ Name="Mow the lawn", Details="Mower in the shed", Pomodoros=0, Complete=false},
@@ -81,9 +80,9 @@ namespace Taskmato_2.Data
             new Models.Taskmato{ Name="Text Dad", Details="", Pomodoros=0, Complete=false}
             };
 
-            tasks.ForEach(s => taskList.AddTaskmato(s));
-            user.TaskLists.Add(taskList);
-            _context.SaveChanges();
+            Tasks.ForEach(s => TaskList.AddTaskmato(s));
+            user.TaskLists.Add(TaskList);
+            Context.SaveChanges();
         }
     }
 }

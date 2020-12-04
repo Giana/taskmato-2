@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Taskmato_2.Data;
+using Taskmato_2.Data.Services;
 
 namespace Taskmato_2
 {
@@ -47,13 +48,15 @@ namespace Taskmato_2
             {
                 // Cookie settings
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
-
                 options.LoginPath = "/Identity/Account/Login";
                 options.LogoutPath = "/Session/Index";
                 options.SlidingExpiration = true;
             });
 
             services.AddScoped<TaskmatoInitializer>();
+            services.AddScoped<ITaskmatoService, TaskmatoService>();
+            services.AddScoped<ITaskListService, TaskListService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddControllersWithViews();
 
             services.AddDbContext<TaskmatoContext>(options => options.UseSqlServer(
