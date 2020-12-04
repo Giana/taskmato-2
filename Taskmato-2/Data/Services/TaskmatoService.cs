@@ -7,7 +7,7 @@ using Taskmato_2.Models;
 
 namespace Taskmato_2.Data.Services
 {
-    public class TaskmatoService
+    public class TaskmatoService : ITaskmatoService
     {
         private TaskmatoContext Context;
         private DbSet<Taskmato> Taskmatos;
@@ -20,12 +20,14 @@ namespace Taskmato_2.Data.Services
             TaskLists = context.TaskLists;
         }
 
-        public void AddTaskmato(Taskmato taskmato)
+        public bool AddTaskmato(Taskmato taskmato)
         {
             Taskmatos.Add(taskmato);
+
+            return Context.SaveChanges() != 0;
         }
 
-        public void UpdateTaskmato(int oldTaskmatoId, Taskmato newTaskmato)
+        public bool UpdateTaskmato(int oldTaskmatoId, Taskmato newTaskmato)
         {
             Taskmato OldTaskmato = Taskmatos.FirstOrDefault(x => x.TaskmatoId == oldTaskmatoId);
             OldTaskmato.Name = newTaskmato.Name;
@@ -34,12 +36,16 @@ namespace Taskmato_2.Data.Services
             OldTaskmato.Complete = newTaskmato.Complete;
 
             Taskmatos.Update(OldTaskmato);
+
+            return Context.SaveChanges() != 0;
         }
 
-        public void DeleteTaskmato(int taskmatoId)
+        public bool DeleteTaskmato(int taskmatoId)
         {
             Taskmato TaskmatoToDelete = Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId);
             Taskmatos.Remove(TaskmatoToDelete);
+
+            return Context.SaveChanges() != 0;
         }
 
         public Taskmato RetrieveTaskmato(int taskmatoId)
