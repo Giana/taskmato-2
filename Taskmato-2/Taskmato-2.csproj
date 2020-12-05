@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Documentation\" />
     <Folder Include="Images\" />
+    <Folder Include="Areas\" />
   </ItemGroup>
 
   <ItemGroup>

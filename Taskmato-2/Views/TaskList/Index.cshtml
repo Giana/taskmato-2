@@ -1,0 +1,90 @@
+﻿@model List<Taskmato_2.DTOs.TaskListDTO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid">
+                        <img class="mb-4 mx-auto logo" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+                        <div class="mb-2 px-2 rounded grey">
+                            <table class="table">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <label>@item.Date.ToString("MM-dd-yyyy")</label>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-light" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@item.TaskListID">Open</a>
+                                            <a class="btn btn-outline-light" asp-controller="TaskList" asp-action="Delete" asp-route-taskListId="@item.TaskListID">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <hr class="my-4" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid text-center mb-2">
+                        @Html.ActionLink("New List", "Create", "TaskList", null, new { @class = "btn btn-dark btn-lg pl-4 pr-4" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid rounded text-center mb-3 pomodoro-timer-box">
+                        <h1 class="display-4 pt-4" id="timer">00:00</h1>
+                        <hr class="my-4">
+                        <div class="pb-4">
+                            <a class="btn btn-light btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="runTimer(60 * 25)">Pomodoro</a>
+                            <a class="btn btn-dark btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="runTimer(60 * 5)">Short Break</a>
+                            <a class="btn btn-light btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="resetTimer()">Reset</a>
+                            <a class="btn btn-dark btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="runTimer(60 * 15)">Long Break</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="container-fluid rounded pt-4 pb-4 date-box">
+                        <div class="display-4 text-center">
+                            <h1 id="date">@DateTime.Now.ToString("MM/dd/yyyy")</h1>
+                        </div>
+                        <hr class="my-4">
+                        <div class="row">
+                            <div class="col-xs mr-auto ml-2">
+                                <a class="btn btn-lg btn-outline-dark" id="left-button" href="#" role="button"><</a>
+                            </div>
+                            <div class="col-xs ml-auto mr-2">
+                                <a class="btn btn-lg btn-outline-dark" id="right-button" href="#" role="button">></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <div class="container-fluid">
+                        <a class="btn btn-lg" href="#" role="button">Save</a>
+                        <a class="btn btn-lg" href="#" role="button">Load</a>
+                    </div>
+                </div>
+                <div class="col-xs">
+                    <div class="container-fluid">
+                        <a class="btn btn-lg" id="options-button" href="#" role="button">Options</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
