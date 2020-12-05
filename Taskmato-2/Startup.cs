@@ -48,7 +48,7 @@ namespace Taskmato_2
             {
                 // Cookie settings
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
-                options.LoginPath = "/Identity/Account/Login";
+                options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Session/Index";
                 options.SlidingExpiration = true;
             });
@@ -94,7 +94,7 @@ namespace Taskmato_2
                 endpoints.MapRazorPages();
             });
 
-            dataInit.InitAsync().Wait();
+            //dataInit.InitAsync().Wait();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Taskmato_2.DTOs
 {
-    public class TaskmatoListDTO
+    public class TaskmatoViewModel
     {
         public int TaskListID { get; set; }
         public List<TaskmatoDTO> Taskmatos { get; set; }

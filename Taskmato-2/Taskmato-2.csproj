@@ -19,7 +19,6 @@
   <ItemGroup>
     <Folder Include="Documentation\" />
     <Folder Include="Images\" />
-    <Folder Include="Areas\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +37,13 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

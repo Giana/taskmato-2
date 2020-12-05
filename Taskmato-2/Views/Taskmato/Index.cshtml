@@ -1,4 +1,4 @@
-﻿@model List<Taskmato_2.Models.Taskmato>
+﻿@model Taskmato_2.DTOs.TaskmatoViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +13,7 @@
                         <img class="mb-4 mx-auto logo" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
                         <div class="mb-2 px-2 rounded grey">
                             <table class="table">
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.Taskmatos)
                                 {
                                     <tr>
                                         <td>

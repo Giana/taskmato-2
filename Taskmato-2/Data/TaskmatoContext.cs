@@ -36,11 +36,6 @@ namespace Taskmato_2.Data
             builder.Entity<TaskList>()
                 .Property(x => x.Date)
                 .IsRequired();
-
-            builder.Entity<User>()
-                .HasMany(x => x.TaskLists)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

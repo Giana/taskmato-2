@@ -8,7 +8,7 @@ namespace Taskmato_2.DTOs
 {
     public class TaskmatoDTO
     {
-        public int TaskmatoID { get; set; }
+        public int TaskmatoId { get; set; }
         [Required]
         [StringLength(100, ErrorMessage = "{0} character limit: 100")]
         public string Name { get; set; }

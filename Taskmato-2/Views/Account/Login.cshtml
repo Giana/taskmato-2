@@ -1,0 +1,28 @@
+﻿@model Taskmato_2.DTOs.LoginDTO;
+
+
+
+<div>
+    <div>
+        Login to your Taskmato account!
+    </div>
+    <div>
+        <div>
+            <div asp-validation-summary="All"></div>
+            <form role="form" asp-action="LoginConfirmed" method="post" autocomplete="off">
+                <div>
+                    <label class="sr-only" asp-for="Username"></label>
+                    <input type="text" placeholder="Username" asp-for="Username" class="form-username form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div>
+                    <label class="sr-only" asp-for="Password"></label>
+                    <input type="text" placeholder="Password" asp-for="Password" class="form-password form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn" name="login">Login</button>
+                <a>No account? Click here to sign up! #TODO</a>
+            </form>
+        </div>
+    </div>
+</div>

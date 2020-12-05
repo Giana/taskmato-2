@@ -30,12 +30,12 @@ namespace Taskmato_2.Controllers
         public ActionResult Index(int taskListId)
         {
             var _Taskmatos = TaskmatoService.RetrieveTaskmatos(taskListId).ToList();
-            var CurrDTO = new TaskmatoListDTO
+            var CurrDTO = new TaskmatoViewModel
             {
                 TaskListID = taskListId,
                 Taskmatos = _Taskmatos.Select(x => new TaskmatoDTO
                 {
-                    TaskmatoID = x.TaskmatoId,
+                    TaskmatoId = x.TaskmatoId,
                     Name = x.Name,
                     Details = x.Details,
                     Pomodoros = x.Pomodoros,
