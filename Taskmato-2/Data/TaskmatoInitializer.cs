@@ -57,7 +57,7 @@ namespace Taskmato_2.Data
             {
                 await UserManager.CreateAsync(User, password);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
