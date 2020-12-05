@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-//using System.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Net;
-using System.Web;
-//using System.Web.Mvc;
 using Taskmato_2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Taskmato_2.Data.Services;
 using Microsoft.AspNetCore.Identity;
+using Taskmato_2.DTOs;
 
 namespace Taskmato_2.Controllers
 {
@@ -33,7 +29,22 @@ namespace Taskmato_2.Controllers
 
         public ActionResult Index(int taskListId)
         {
-            return View();
+            var _Taskmatos = TaskmatoService.RetrieveTaskmatos(taskListId).ToList();
+            var CurrDTO = new TaskmatoListDTO
+            {
+                TaskListID = taskListId,
+                Taskmatos = _Taskmatos.Select(x => new TaskmatoDTO
+                {
+                    TaskmatoID = x.TaskmatoId,
+                    Name = x.Name,
+                    Details = x.Details,
+                    Pomodoros = x.Pomodoros,
+                    Complete = x.Complete
+                })
+                .ToList()
+            };
+
+            return View(CurrDTO);
         }
 
         public ActionResult Details(int? id)
@@ -46,7 +57,48 @@ namespace Taskmato_2.Controllers
             return View();
         }
 
+        [HttpPost, ActionName("Create")]
+        public ActionResult Create(int taskListId, TaskmatoDTO taskmatoDto)
+        {
+            try
+            {
+                var _TaskList = TaskListService.RetrieveTaskList(taskListId);
+                var NewTaskmato = new Taskmato
+                {
+                    Name = taskmatoDto.Name,
+                    Details = taskmatoDto.Details,
+                    Pomodoros = taskmatoDto.Pomodoros,
+                    Complete = false
+                };
+
+                _TaskList.AddTaskmato(NewTaskmato);
+
+                if(!TaskmatoService.AddTaskmato(NewTaskmato))
+                {
+                    throw new Exception("Taskmato not created");
+                }
+            }
+            catch(Exception e)
+            {
+                TempData["error"] = e.Message;
+                return View(taskmatoDto);
+            }
+
+            return RedirectToAction(nameof(Index), taskListId);
+        }
+
         public ActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return new BadRequestResult();
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit()
         {
             return View();
         }
@@ -59,19 +111,18 @@ namespace Taskmato_2.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public User RetrieveCurrentUser()
         {
-            User _User;
             try
             {
-                string Username = User.Identity.Name;
+                var Username = User.Identity.Name;
                 
                 if(Username != null)
                 {
-                    _User = UserService.RetrieveUserByUsername(Username);
+                    var _User = UserService.RetrieveUserByUsername(Username);
 
                     return _User;
                 }

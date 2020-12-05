@@ -10,6 +10,7 @@ namespace Taskmato_2.Models
         public int TaskListId { get; set; }
         public DateTime Date { get; set; }
         public ICollection<Taskmato> Taskmatos { get; set; }
+        public User User { get; set; }
 
         public TaskList()
         {
