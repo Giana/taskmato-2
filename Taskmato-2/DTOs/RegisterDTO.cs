@@ -11,7 +11,7 @@ namespace Taskmato_2.DTOs
     {
         [BindProperty]
         [Required(ErrorMessage = "Email is required")]
-        [RegularExpression("^(.+)@(.+).(.+)$", ErrorMessage ="Please enter a valid email")]
+        [RegularExpression("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", ErrorMessage ="Please enter a valid email")]
         public string Email { get; set; }
 
         [BindProperty]

@@ -1,55 +1,46 @@
-﻿@model Taskmato_2.Models.Taskmato
+﻿@model Taskmato_2.DTOs.TaskmatoDTO
 
 @{
     ViewBag.Title = "Edit";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
+<div class="form-horizontal">
         <div class="text-center">
             <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
             <h4>Edit Task</h4>
         </div>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="container">
+    <div class="container">
+        <form asp-action="EditConfirmed" method="post" asp-route-taskmatoId="@Model.TaskmatoId"  asp-route-taskListId="@Model.TaskListId">
+            <div asp-validation-summary="All"></div>
             <div class="row" id="input-row">
                 <div class="col-md mx-3 rounded grey">
                     <div class="row">
                         <div class="col form-group text-center">
-                            @Html.HiddenFor(model => model.TaskmatoId)
-
-                            <strong>@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col" })</strong>
-                            @Html.TextBoxFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            <br>
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            <label class="sr-only" asp-for="Name"></label>
+                            <input type="text" class="form-control" asp-for="Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <strong>@Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col" })</strong>
-                            @Html.TextBoxFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
-                            <br>
-                            @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                            <label class="sr-only" asp-for="Details"></label>
+                            <textarea class="form-control" asp-for="Details" rows="3"></textarea>
+                            <span asp-validation-for="Details" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <strong>@Html.LabelFor(model => model.Pomodoros, htmlAttributes: new { @class = "control-label col" })</strong>
-                            @Html.TextBoxFor(model => model.Pomodoros, new { htmlAttributes = new { @class = "form-control" } })
-                            <br>
-                            @Html.ValidationMessageFor(model => model.Pomodoros, "", new { @class = "text-danger" })
+                            <label class="sr-only" asp-for="Pomodoros"></label>
+                            <input type="text" class="form-control" asp-for="Pomodoros" />
+                            <span asp-validation-for="Pomodoros" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <strong>@Html.LabelFor(model => model.Complete, htmlAttributes: new { @class = "control-label col" })</strong>
-                            @Html.EditorFor(model => model.Complete)
-                            <br>
-                            @Html.ValidationMessageFor(model => model.Complete, "", new { @class = "text-danger" })
+                            <label class="sr-only" asp-for="Complete"></label>
+                            <input type="checkbox" class="form-control" asp-for="Complete" />
+                            <span asp-validation-for="Complete" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -66,14 +57,14 @@
                     <div class="row">
                         <div class="col form-group">
                             <div class="container-fluid text-center my-2">
-                                @Html.ActionLink("Cancel", "Index", "Task", null, new { @class = "btn btn-dark btn-lg pl-4 pr-4" })
+                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-}
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

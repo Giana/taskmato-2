@@ -55,6 +55,18 @@
 </head>
 <body>
     <div class="container body-content">
+        @if (TempData["error"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["error"].ToString()
+            </div>
+        }
+        else if (TempData["success"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["success"].ToString()
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>

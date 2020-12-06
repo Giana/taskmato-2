@@ -105,20 +105,46 @@ namespace Taskmato_2.Controllers
             return RedirectToAction(nameof(Index), new { taskListId = taskmatoDto.TaskListId } );
         }
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int taskListId, int taskmatoId)
         {
-            if(id == null)
-            {
-                return new BadRequestResult();
-            }
+            var taskList = TaskListService.RetrieveTaskList(taskListId);
+            var taskmato = taskList.Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId) ?? throw new Exception("Taskmato not found");
 
-            return View();
+            var dto = new TaskmatoDTO {
+                TaskmatoId = taskmatoId,
+                TaskListId = taskListId,
+                Name = taskmato.Name,
+                Details = taskmato.Details,
+                Pomodoros = taskmato.Pomodoros,
+                Complete = taskmato.Complete
+            };
+
+            return View(dto);
         }
 
         [HttpPost]
-        public ActionResult Edit()
+        public ActionResult EditConfirmed(int taskListId, int taskmatoId, TaskmatoDTO taskmatoDto)
         {
-            return View();
+            try
+            {
+                var taskList = TaskListService.RetrieveTaskList(taskListId);
+                var taskmato = taskList.Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId) ?? throw new Exception("Taskmato not found");
+
+                taskmato.Name = taskmatoDto.Name;
+                taskmato.Details = taskmatoDto.Details;
+                taskmato.Pomodoros = taskmatoDto.Pomodoros;
+                taskmato.Details = taskmatoDto.Details;
+                taskmato.Complete = taskmatoDto.Complete;
+
+                TaskmatoService.UpdateTaskmato(taskmatoId, taskmato);
+
+                TempData["success"] = "Taskmato updated!";
+            }
+            catch(Exception e)
+            {
+                TempData["error"] = e.Message;
+            }
+            return RedirectToAction(nameof(Index), new { taskListId = taskListId });
         }
 
         public ActionResult Delete(int taskListId, int taskmatoId)
