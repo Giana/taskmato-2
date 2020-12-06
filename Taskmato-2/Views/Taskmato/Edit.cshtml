@@ -14,50 +14,54 @@
         <form asp-action="EditConfirmed" method="post" asp-route-taskmatoId="@Model.TaskmatoId" asp-route-taskListId="@Model.TaskListId">
             <div asp-validation-summary="All"></div>
             <div class="row" id="input-row">
-                <div class="col-md mx-3 rounded grey">
+                <div class="col-md mx-3 pt-3 pb-1 rounded grey">
                     <div class="row">
                         <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Name"></label>
-                            <input type="text" class="form-control" asp-for="Name" />
+                            <p><strong>@Html.DisplayNameFor(model => model.Name)</strong></p>
+                            <input type="text" class="form-control mx-auto" asp-for="Name" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Details"></label>
-                            <textarea class="form-control" asp-for="Details" rows="3"></textarea>
+                            <p><strong>@Html.DisplayNameFor(model => model.Details)</strong></p>
+                            <textarea class="form-control mx-auto" asp-for="Details" rows="3"></textarea>
                             <span asp-validation-for="Details" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Pomodoros"></label>
-                            <input type="text" class="form-control" asp-for="Pomodoros" />
+                            <p><strong>@Html.DisplayNameFor(model => model.Pomodoros)</strong></p>
+                            <input type="text" class="form-control text-center mx-auto" asp-for="Pomodoros" />
                             <span asp-validation-for="Pomodoros" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Complete"></label>
-                            <input type="checkbox" class="form-control" asp-for="Complete" />
+                            <p><strong>@Html.DisplayNameFor(model => model.Complete)</strong></p>
+                            <input type="checkbox" class="form-control text-center mx-auto" asp-for="Complete" />
                             <span asp-validation-for="Complete" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row" id="button-row">
-                <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
+                <div class="col px-2 pt-3 pb-2 mx-3 my-3 text-center rounded grey">
                     <div class="row">
-                        <div class="col form-group">
-                            <div class="container-fluid text-center mt-2">
-                                <input type="submit" value="Save" class="btn btn-light btn-lg pl-4 pr-4" />
-                            </div>
+                        <div class="col">
+                            <h4>Would you like to save this task?</h4>
+                            <hr />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group">
-                            <div class="container-fluid text-center my-2">
-                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
+                            <div class="container text-center">
+                                <input type="submit" value="Save" class="btn btn-dark btn-lg pl-4 pr-4" />
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <div class="container text-center">
+                                <a class="btn btn-light btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
                             </div>
                         </div>
                     </div>

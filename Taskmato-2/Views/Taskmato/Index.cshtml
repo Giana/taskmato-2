@@ -17,7 +17,7 @@
                                 {
                                     <tr class="text-center">
                                         <td>
-                                            <a>@Html.DisplayFor(modelItem => item.Name)</a>
+                                            <a onclick="displayCurrentTask('@item.Name')">@Html.DisplayFor(modelItem => item.Name)</a>
                                         </td>
                                         <td>
                                             <a class="mx-1" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Edit</a>
@@ -57,19 +57,12 @@
             </div>
             <div class="row">
                 <div class="col-md">
-                    <div class="container-fluid rounded pt-4 pb-4 date-box">
-                        <div class="display-4 text-center">
-                            <h1 id="date">@DateTime.Now.ToString("MM/dd/yyyy")</h1>
+                    <div class="container-fluid rounded pt-4 pb-4 text-center date-box">
+                        <div class="display-4">
+                            <h1>Current Task</h1>
                         </div>
                         <hr class="my-4">
-                        <div class="row">
-                            <div class="col-xs mr-auto ml-2">
-                                <a class="btn btn-lg btn-outline-dark" id="left-button" href="#" role="button"><</a>
-                            </div>
-                            <div class="col-xs ml-auto mr-2">
-                                <a class="btn btn-lg btn-outline-dark" id="right-button" href="#" role="button">></a>
-                            </div>
-                        </div>
+                        <h2 onclick="clearCurrentTask()" id="current-task">Click on a task!</h2>
                     </div>
                 </div>
             </div>

@@ -14,36 +14,40 @@
         <form asp-action="Create" asp-route-taskListId="@Model.TaskListId" method="post">
             <div asp-validation-summary="All"></div>
             <div class="row" id="input-row">
-                <div class="col-md mx-3 rounded grey">
+                <div class="col-md mx-3 pt-3 pb-1 rounded grey">
                     <div class="row">
                         <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Name"></label>
-                            <input type="text" class="form-control" asp-for="Name"/>
+                            <p><strong>@Html.DisplayNameFor(model => model.Name)</strong></p>
+                            <input type="text" class="form-control mx-auto" asp-for="Name" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Details"></label>
-                            <textarea class="form-control" asp-for="Details" rows="3"></textarea>
+                            <p><strong>@Html.DisplayNameFor(model => model.Details)</strong></p>
+                            <textarea class="form-control mx-auto" asp-for="Details" rows="3"></textarea>
                             <span asp-validation-for="Details" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row" id="button-row">
-                <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
+                <div class="col px-2 pt-3 pb-2 mx-3 my-3 text-center rounded grey">
                     <div class="row">
-                        <div class="col form-group">
-                            <div class="container-fluid text-center mt-2">
-                                <input type="submit" value="Create" class="btn btn-light btn-lg pl-4 pr-4" />
-                            </div>
+                        <div class="col">
+                            <h4>Would you like to create this new task?</h4>
+                            <hr />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group">
-                            <div class="container-fluid text-center my-2">
-                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index">Cancel</a>
+                            <div class="container text-center">
+                                <input type="submit" value="Create" class="btn btn-dark btn-lg pl-4 pr-4" />
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <div class="container text-center">
+                                <a class="btn btn-light btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
                             </div>
                         </div>
                     </div>

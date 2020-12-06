@@ -11,10 +11,9 @@
             <h4>Task Details</h4>
         </div>
         <hr>
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="container">
             <div class="row" id="input-row">
-                <div class="col-md mx-3 rounded grey">
+                <div class="col-md mx-3 pt-3 pb-1 rounded grey">
                     <div class="row">
                         <div class="col form-group text-center">
                             <p><strong>@Html.DisplayNameFor(model => model.Name)</strong></p>
@@ -42,18 +41,22 @@
                 </div>
             </div>
             <div class="row" id="button-row">
-                <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
+                <div class="col px-2 pt-3 pb-2 mx-3 my-3 text-center rounded grey">
                     <div class="row">
-                        <div class="col form-group">
-                            <div class="container-fluid text-center mt-2">
-                                <a class="btn btn-light btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@Model.TaskmatoId">Edit</a>
-                            </div>
+                        <div class="col">
+                            <h4>Would you like to edit this task?</h4>
+                            <hr />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group">
-                            <div class="container-fluid text-center my-2">
-                                <a class="btn btn-dark btn-lg px-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
+                            <div class="container text-center">
+                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@Model.TaskmatoId">Edit</a>
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <div class="container text-center">
+                                <a class="btn btn-light btn-lg px-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Go Back</a>
                             </div>
                         </div>
                     </div>
