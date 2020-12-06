@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Taskmato_2.DTOs;
@@ -16,7 +14,8 @@ namespace Taskmato_2.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IUserService _userService;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IUserService userService)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,7 +34,7 @@ namespace Taskmato_2.Controllers
 
             if(result.Succeeded)
             {
-                return RedirectToAction("Index", "TaskList");
+                return RedirectToAction(nameof(Index), "TaskList");
             }
 
             TempData["error"] = "Wrong username or password";
@@ -58,11 +57,12 @@ namespace Taskmato_2.Controllers
         [HttpPost]
         public async Task<ActionResult> RegisterConfirmed(RegisterDTO registerDto)
         {
-            var User = new IdentityUser { UserName = registerDto.Username, Email = registerDto.Email };
+            var user = new IdentityUser { UserName = registerDto.Username, Email = registerDto.Email };
 
             try
             {
-                await _userManager.CreateAsync(User, registerDto.Password);
+                await _userManager.CreateAsync(user, registerDto.Password);
+
                 var newUser = new User
                 {
                     Username = registerDto.Username,
@@ -71,7 +71,7 @@ namespace Taskmato_2.Controllers
 
                 _userService.AddUser(newUser);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 TempData["error"] = e.Message;
 
@@ -80,12 +80,12 @@ namespace Taskmato_2.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(registerDto.Username, registerDto.Password, true, lockoutOnFailure: false);
 
-            if (result.Succeeded)
+            if(result.Succeeded)
             {
-                return RedirectToAction("Index", "TaskList");
+                return RedirectToAction(nameof(Index), "TaskList");
             }
 
-            TempData["error"] = "Something went wrong.";
+            TempData["error"] = "Something went wrong";
 
             return RedirectToAction(nameof(Register));
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Taskmato_2.Models;
 
 namespace Taskmato_2.Data.Services
@@ -9,7 +6,7 @@ namespace Taskmato_2.Data.Services
     public interface IUserService
     {
         bool AddUser(User user);
-        User RetrieveUserByID(int userId);
+        User RetrieveUserById(int userId);
         User RetrieveUserByUsername(string username);
         User RetrieveUserByEmail(string email);
         ICollection<User> RetrieveUsers();

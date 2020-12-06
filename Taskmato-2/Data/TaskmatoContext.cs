@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Taskmato_2.Models;
 
 namespace Taskmato_2.Data
@@ -14,15 +10,11 @@ namespace Taskmato_2.Data
         public DbSet<TaskList> TaskLists { get; set; }
         public DbSet<User> TaskmatoUsers { get; set; }
 
-        public TaskmatoContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public TaskmatoContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
 
             builder.Entity<Taskmato>()
                 .Property(x => x.Name)

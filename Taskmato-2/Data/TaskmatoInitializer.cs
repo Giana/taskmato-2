@@ -1,72 +1,69 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Taskmato_2.Models;
 
 namespace Taskmato_2.Data
 {
     public class TaskmatoInitializer 
     {
-        private TaskmatoContext Context;
-        private UserManager<IdentityUser> UserManager;
+        private TaskmatoContext context;
+        private UserManager<IdentityUser> userManager;
 
         public TaskmatoInitializer(TaskmatoContext context, UserManager<IdentityUser> userManager)
         {
-            this.Context = context;
-            this.UserManager = userManager;
+            this.context = context;
+            this.userManager = userManager;
         }
 
         public async Task InitAsync()
         {
-            Context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
 
-            if (Context.Database.EnsureCreated())
+            if(context.Database.EnsureCreated())
             {
                 await InitializeData();
-
             }
             else
             {
-                throw new Exception("Database Unipack could not be created");
+                throw new Exception("Database could not be created");
             }
 
         }
 
         private async Task InitializeData()
         {
-            const string Password = "password";
-            await CreateUser("giana", "giana@giana.dev", Password);
+            const string password = "password";
+            await CreateUser("johndoe", "john@doe.whatever", password);
 
-            var userGiana = new User
+            var userJohn = new User
             {
-                Email = "giana@giana.dev",
-                Username = "giana"
+                Email = "john@doe.whatever",
+                Username = "johndoe"
             };
 
-            Context.TaskmatoUsers.Add(userGiana);
-            InitTasks(userGiana);
+            context.TaskmatoUsers.Add(userJohn);
+            InitTasks(userJohn);
         }
         private async Task CreateUser(string username, string email, string password)
         {
-            var User = new IdentityUser { UserName = username, Email = email };
+            var user = new IdentityUser { UserName = username, Email = email };
 
             try
             {
-                await UserManager.CreateAsync(User, password);
+                await userManager.CreateAsync(user, password);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Console.WriteLine(e.Message);
             }
-
         }
         protected void InitTasks(User user)
         {
-            var TaskList = new TaskList { Date = DateTime.Now };
-            var Tasks = new List<Taskmato>
+            var taskList = new TaskList { Date = DateTime.Now };
+
+            var taskmatos = new List<Taskmato>
             {
             new Models.Taskmato{ Name="Walk the dog", Details="Twice around the block", Pomodoros=0, Complete=false},
             new Models.Taskmato{ Name="Mow the lawn", Details="Mower in the shed", Pomodoros=0, Complete=false},
@@ -79,9 +76,11 @@ namespace Taskmato_2.Data
             new Models.Taskmato{ Name="Text Dad", Details="", Pomodoros=0, Complete=false}
             };
 
-            Tasks.ForEach(s => TaskList.AddTaskmato(s));
-            user.TaskLists.Add(TaskList);
-            Context.SaveChanges();
+            taskmatos.ForEach(s => taskList.AddTaskmato(s));
+
+            user.TaskLists.Add(taskList);
+
+            context.SaveChanges();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Taskmato_2.Models;
 
@@ -9,53 +8,55 @@ namespace Taskmato_2.Data.Services
 {
     public class TaskListService : ITaskListService
     {
-        private TaskmatoContext Context;
-        private DbSet<User> Users;
-        private DbSet<TaskList> TaskLists;
+        private TaskmatoContext context;
+        private DbSet<User> users;
+        private DbSet<TaskList> taskLists;
 
         public TaskListService(TaskmatoContext context)
         {
-            Context = context;
-            Users = context.TaskmatoUsers;
-            TaskLists = context.TaskLists;
+            this.context = context;
+            users = context.TaskmatoUsers;
+            taskLists = context.TaskLists;
         }
 
         public bool AddTaskList(TaskList taskList)
         {
-            TaskLists.Add(taskList);
+            taskLists.Add(taskList);
 
-            return Context.SaveChanges() != 0;
+            return context.SaveChanges() != 0;
         }
 
-        public bool AddTaskmatoToTaskListById(int taskListId, Taskmato taskmato)
+        public bool AddTaskmatoToTaskList(int taskListId, Taskmato taskmato)
         {
-            var tasklist = TaskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Couldn't find tasklist");
-            tasklist.AddTaskmato(taskmato);
-            TaskLists.Update(tasklist);
+            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Could not find task list");
+            
+            taskList.AddTaskmato(taskmato);
+            taskLists.Update(taskList);
 
-            return Context.SaveChanges() != 0;
+            return context.SaveChanges() != 0;
         }
 
         public bool DeleteTaskList(int taskListId)
         {
-            TaskList TaskListToDelete = TaskLists.FirstOrDefault(x => x.TaskListId == taskListId);
-            TaskLists.Remove(TaskListToDelete);
+            TaskList taskListToDelete = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Could not find task list");
 
-            return Context.SaveChanges() != 0;
+            taskLists.Remove(taskListToDelete);
+
+            return context.SaveChanges() != 0;
         }
 
         public TaskList RetrieveTaskList(int taskListId)
         {
-            TaskList TaskListToRetrieve = TaskLists.Include(x => x.Taskmatos).FirstOrDefault(x => x.TaskListId == taskListId);
+            TaskList taskListToRetrieve = taskLists.Include(x => x.Taskmatos).FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Could not find task list");
 
-            return TaskListToRetrieve;
+            return taskListToRetrieve;
         }
 
         public ICollection<TaskList> RetrieveTaskLists(int userId)
         {
-            User User = Users.Include(x => x.TaskLists).ThenInclude(x => x.Taskmatos).FirstOrDefault(x => x.UserId == userId);
+            User user = users.Include(x => x.TaskLists).ThenInclude(x => x.Taskmatos).FirstOrDefault(x => x.UserId == userId) ?? throw new Exception("Could not find user");
 
-            return User.TaskLists;
+            return user.TaskLists;
         }
     }
 }

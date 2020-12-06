@@ -20,12 +20,10 @@ namespace Taskmato_2
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostContext, builder) =>
                 {
-                    // Development
                     if(hostContext.HostingEnvironment.IsDevelopment())
                     {
                         builder.AddJsonFile("appsettings.Secrets.Development.json", optional: false, reloadOnChange: true);
                     }
-                    // Deployment
                     else
                     {
                         builder.AddJsonFile("appsettings.Secrets.json", optional: false, reloadOnChange: true);

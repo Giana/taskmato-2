@@ -9,44 +9,45 @@ namespace Taskmato_2.Data.Services
 {
     public class UserService : IUserService
     {
-        private TaskmatoContext Context;
-        private DbSet<User> Users;
+        private TaskmatoContext context;
+        private DbSet<User> users;
 
         public UserService(TaskmatoContext context)
         {
-            Context = context;
-            Users = context.TaskmatoUsers;
+            this.context = context;
+            users = context.TaskmatoUsers;
         }
+
         public bool AddUser(User user)
         {
-            Users.Add(user);
+            users.Add(user);
 
-            return Context.SaveChanges() != 0;
+            return context.SaveChanges() != 0;
         }
 
-        public User RetrieveUserByID(int userId)
+        public User RetrieveUserById(int userId)
         {
-            return Users.FirstOrDefault(x => x.UserId == userId);
+            return users.FirstOrDefault(x => x.UserId == userId) ?? throw new Exception("Could not find user");
         }
 
         public User RetrieveUserByUsername(string username)
         {
-            return Users.FirstOrDefault(x => x.Username == username);
+            return users.FirstOrDefault(x => x.Username == username) ?? throw new Exception("Could not find user");
         }
 
         public User RetrieveUserByEmail(string email)
         {
-            return Users.FirstOrDefault(x => x.Email == email);
+            return users.FirstOrDefault(x => x.Email == email) ?? throw new Exception("Could not find user");
         }
 
         public ICollection<User> RetrieveUsers()
         {
-            return Users.ToList();
+            return users.ToList();
         }
 
         public bool IsUsernameAvailable(string username)
         {
-            return Users.FirstOrDefault(x => x.Username == username) == null;
+            return users.FirstOrDefault(x => x.Username == username) == null;
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Taskmato_2
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var initConfig = new Config();
@@ -46,7 +45,6 @@ namespace Taskmato_2
 
             services.ConfigureApplicationCookie(options =>
             {
-                // Cookie settings
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Session/Index";
@@ -64,19 +62,18 @@ namespace Taskmato_2
                 ));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TaskmatoInitializer dataInit)
         {
-            if (env.IsDevelopment())
+            if(env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -93,8 +90,6 @@ namespace Taskmato_2
                     pattern: "{controller=TaskList}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-
-            //dataInit.InitAsync().Wait();
         }
     }
 }

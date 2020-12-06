@@ -29,15 +29,16 @@ namespace Taskmato_2.Controllers
 
         public ActionResult Index()
         {
-            var _User = RetrieveCurrentUser();
-            var TaskLists = _taskListService.RetrieveTaskLists(_User.UserId).Select(x => new TaskListDTO
+            var user = RetrieveCurrentUser();
+
+            var taskLists = _taskListService.RetrieveTaskLists(user.UserId).Select(x => new TaskListDTO
             {
                 TaskListId = x.TaskListId,
                 Date = x.Date
             })
             .ToList();
 
-            return View(TaskLists);
+            return View(taskLists);
         }
 
         public ActionResult Create()
@@ -51,6 +52,7 @@ namespace Taskmato_2.Controllers
             try
             {
                 var user = RetrieveCurrentUser();
+
                 var newTaskList = new TaskList
                 {
                     Date = taskListDto.Date,
@@ -65,6 +67,7 @@ namespace Taskmato_2.Controllers
             catch(Exception e)
             {
                 TempData["error"] =  e.Message;
+
                 return View(taskListDto);
             }
 
@@ -76,7 +79,8 @@ namespace Taskmato_2.Controllers
         {
             var user = RetrieveCurrentUser();
             var taskLists = _taskListService.RetrieveTaskLists(user.UserId);
-            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Tasklist not found");
+            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Task list not found");
+            
             var taskMatoDto = new TaskListDTO
             {
                 TaskListId = taskListId,
@@ -90,10 +94,9 @@ namespace Taskmato_2.Controllers
         [HttpPost]
         public ActionResult DeleteConfirmed(int taskListId)
         {
-
             var user = RetrieveCurrentUser();
             var taskLists = _taskListService.RetrieveTaskLists(user.UserId);
-            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Tasklist not found");
+            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Task list not found");
 
             _taskListService.DeleteTaskList(taskList.TaskListId);
 
@@ -104,18 +107,18 @@ namespace Taskmato_2.Controllers
         {
             try
             {
-                var Username = User.Identity.Name;
+                var username = User.Identity.Name;
 
-                if (Username != null)
+                if(username != null)
                 {
-                    var _User = _userService.RetrieveUserByUsername(Username);
+                    var user = _userService.RetrieveUserByUsername(username);
 
-                    return _User;
+                    return user;
                 }
 
                 throw new Exception("Could not retrieve user");
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }

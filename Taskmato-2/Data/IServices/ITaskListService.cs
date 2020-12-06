@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Taskmato_2.Models;
 
 namespace Taskmato_2.Data.Services
@@ -10,8 +7,7 @@ namespace Taskmato_2.Data.Services
     {
         bool AddTaskList(TaskList taskList);
         bool DeleteTaskList(int taskListId);
-        bool AddTaskmatoToTaskListById(int taskListId, Taskmato taskmato);
-        //bool UpdateTaskList(int taskListId, Taskmato taskmato);
+        bool AddTaskmatoToTaskList(int taskListId, Taskmato taskmato);
         TaskList RetrieveTaskList(int taskListId);
         ICollection<TaskList> RetrieveTaskLists(int userId);
     }

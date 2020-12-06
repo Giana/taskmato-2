@@ -6,13 +6,12 @@
 
 <div class="form-horizontal">
     <div class="text-center">
-        <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+        <img class="mb-4 logo-sm" src="~/images/TaskmatoLogoTransparent.png" alt="Taskmato" />
         <h4>Create Task</h4>
     </div>
     <hr />
     <div class="container">
         <form asp-action="Create" asp-route-taskListId="@Model.TaskListId" method="post">
-            <div asp-validation-summary="All"></div>
             <div class="row" id="input-row">
                 <div class="col-md mx-3 pt-3 pb-1 rounded grey">
                     <div class="row">
