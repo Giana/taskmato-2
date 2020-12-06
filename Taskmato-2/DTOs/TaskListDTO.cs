@@ -11,7 +11,7 @@ namespace Taskmato_2.DTOs
 {
     public class TaskListDTO
     {
-        public int TaskListID { get; set; }
+        public int TaskListId { get; set; }
 
         [DataType(DataType.Date)]
         [DateNotInPastAttribute(ErrorMessage = "Your deadline cannot be in the past")]

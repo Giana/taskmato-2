@@ -32,7 +32,7 @@ namespace Taskmato_2.Controllers
             var _User = RetrieveCurrentUser();
             var TaskLists = _taskListService.RetrieveTaskLists(_User.UserId).Select(x => new TaskListDTO
             {
-                TaskListID = x.TaskListId,
+                TaskListId = x.TaskListId,
                 Date = x.Date
             })
             .ToList();
@@ -77,33 +77,31 @@ namespace Taskmato_2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
+
         public ActionResult Delete(int taskListId)
         {
-            var taskList = _taskListService.RetrieveTaskList(taskListId);
-
-            if(taskList == null)
+            var user = RetrieveCurrentUser();
+            var taskLists = _taskListService.RetrieveTaskLists(user.UserId);
+            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Tasklist not found");
+            var taskMatoDto = new TaskListDTO
             {
-                return NotFound();
-            }
+                TaskListId = taskListId,
+                Date = taskList.Date,
+                User = user
+            };
 
-            var currDTO = new TaskListDTO { Date = taskList.Date, TaskListID = taskListId };
-
-            return View(currDTO);
+            return View(taskMatoDto);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         public ActionResult DeleteConfirmed(int taskListId)
         {
-            try
-            {
-                _taskListService.DeleteTaskList(taskListId);
-            }
-            catch(Exception e)
-            {
-                TempData["error"] = e.Message;
-                return RedirectToAction(nameof(Index));
-            }
+
+            var user = RetrieveCurrentUser();
+            var taskLists = _taskListService.RetrieveTaskLists(user.UserId);
+            var taskList = taskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Tasklist not found");
+
+            _taskListService.DeleteTaskList(taskList.TaskListId);
 
             return RedirectToAction(nameof(Index));
         }
