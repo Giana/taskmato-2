@@ -48,22 +48,16 @@ namespace Taskmato_2.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult Create(TaskListDTO taskListDto)
         {
-            //if(taskListDto.Date.CompareTo(DateTime.Now) < 0)
-            //{
-            //    TempData["dateInPastError"] = "The date cannot be in the past";
-            //    return View(taskListDto);
-            //}
-
             try
             {
-                var _User = RetrieveCurrentUser();
-                var NewTaskList = new TaskList
+                var user = RetrieveCurrentUser();
+                var newTaskList = new TaskList
                 {
                     Date = taskListDto.Date,
-                    User = _User
+                    User = user
                 };
 
-                if(!_taskListService.AddTaskList(NewTaskList))
+                if(!_taskListService.AddTaskList(newTaskList))
                 {
                     throw new Exception("Taskmato not created");
                 }

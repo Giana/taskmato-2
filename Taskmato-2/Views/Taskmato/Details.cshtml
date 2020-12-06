@@ -46,14 +46,14 @@
                     <div class="row">
                         <div class="col form-group">
                             <div class="container-fluid text-center mt-2">
-                                @Html.ActionLink("Edit", "Edit/" + Model.TaskmatoId, "Taskmato", null, new { id = Model.TaskmatoId, @class = "btn btn-light btn-lg pl-4 pr-4" })
+                                <a class="btn btn-light btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@Model.TaskmatoId">Edit</a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col form-group">
                             <div class="container-fluid text-center my-2">
-                                @Html.ActionLink("Cancel", "Index", "Task", null, new { @class = "btn btn-dark btn-lg pl-4 pr-4" })
+                                <a class="btn btn-dark btn-lg px-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
                             </div>
                         </div>
                     </div>

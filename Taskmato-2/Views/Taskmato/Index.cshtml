@@ -15,14 +15,14 @@
                             <table class="table">
                                 @foreach (var item in Model.Taskmatos)
                                 {
-                                    <tr>
+                                    <tr class="text-center">
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            <a>@Html.DisplayFor(modelItem => item.Name)</a>
                                         </td>
                                         <td>
-                                            <a asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Edit</a>
-                                            <a asp-controller="Taskmato" asp-action="Details" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Details</a>
-                                            <a asp-controller="Taskmato" asp-action="Delete" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Delete</a>
+                                            <a class="mx-1" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Edit</a>
+                                            <a class="mx-1" asp-controller="Taskmato" asp-action="Details" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Details</a>
+                                            <a class="mx-1" asp-controller="Taskmato" asp-action="Delete" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Delete</a>
                                         </td>
                                     </tr>
                                 }
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md">
                     <div class="container-fluid text-center mb-2">
-                        <a asp-controller="Taskmato" asp-action="Create" asp-route-taskListId="@Model.TaskListId">Add Task</a>
+                        <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Create" asp-route-taskListId="@Model.TaskListId">Add Task</a>
                     </div>
                 </div>
             </div>
@@ -74,11 +74,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs">
-                    <div class="container-fluid">
+                <div class="col text-left">
+                    <div class="container">
+                        <a asp-controller="TaskList" asp-action="Index">View Task Lists</a>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <div class="container">
                         <a asp-controller="Account" asp-action="LogOut">Log Out</a>
                     </div>
-                </div>s
+                </div>
             </div>
         </div>
     </div>

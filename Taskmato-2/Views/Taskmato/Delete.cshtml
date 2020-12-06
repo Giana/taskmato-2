@@ -7,7 +7,7 @@
 <div>
     <dl class="dl-horizontal">
         <div class="text-center">
-            <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+            <img class="mb-4 logo-sm" src="~/images/TaskmatoLogoTransparent.png" alt="Taskmato" />
             <h4>Delete Task</h4>
             <p class="error">@ViewBag.ErrorMessage</p>
         </div>
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col form-group">
                             <div class="container-fluid text-center my-2">
-                                @Html.ActionLink("Cancel", "Index", "Task", null, new { @class = "btn btn-dark btn-lg pl-4 pr-4" })
+                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>                            </div>
                             </div>
                         </div>
                     </div>

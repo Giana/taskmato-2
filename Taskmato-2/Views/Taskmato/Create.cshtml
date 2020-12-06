@@ -4,53 +4,53 @@
     ViewBag.Title = "Create";
 }
 
-    <div class="form-horizontal">
-        <div class="text-center">
-            <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
-            <h4>Create Task</h4>
-        </div>
-        <hr />
-        <div class="container">
-            <form asp-action="Create" method="post">
-                <div asp-validation-summary="All"></div>
-                <div class="row" id="input-row">
-                    <div class="col-md mx-3 rounded grey">
-                        <div class="row">
-                            <div class="col form-group text-center">
-                                <label class="sr-only" asp-for="Name"></label>
-                                <input type="text" class="form-control" asp-for="Name"/>
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group text-center">
-                                <label class="sr-only" asp-for="Details"></label>
-                                <textarea class="form-control" asp-for="Details" rows="3"></textarea>
-                                <span asp-validation-for="Details" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="button-row">
-                    <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
-                        <div class="row">
-                            <div class="col form-group">
-                                <div class="container-fluid text-center mt-2">
-                                    <input type="submit" value="Create" class="btn btn-light btn-lg pl-4 pr-4" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col form-group">
-                                <div class="container-fluid text-center my-2">
-                                    <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+<div class="form-horizontal">
+    <div class="text-center">
+        <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+        <h4>Create Task</h4>
     </div>
+    <hr />
+    <div class="container">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="row" id="input-row">
+                <div class="col-md mx-3 rounded grey">
+                    <div class="row">
+                        <div class="col form-group text-center">
+                            <label class="sr-only" asp-for="Name"></label>
+                            <input type="text" class="form-control" asp-for="Name"/>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group text-center">
+                            <label class="sr-only" asp-for="Details"></label>
+                            <textarea class="form-control" asp-for="Details" rows="3"></textarea>
+                            <span asp-validation-for="Details" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="button-row">
+                <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
+                    <div class="row">
+                        <div class="col form-group">
+                            <div class="container-fluid text-center mt-2">
+                                <input type="submit" value="Create" class="btn btn-light btn-lg pl-4 pr-4" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <div class="container-fluid text-center my-2">
+                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
