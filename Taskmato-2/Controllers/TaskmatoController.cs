@@ -32,7 +32,7 @@ namespace Taskmato_2.Controllers
             var _Taskmatos = TaskmatoService.RetrieveTaskmatos(taskListId).ToList();
             var CurrDTO = new TaskmatoViewModel
             {
-                TaskListID = taskListId,
+                TaskListId = taskListId,
                 Taskmatos = _Taskmatos.Select(x => new TaskmatoDTO
                 {
                     TaskmatoId = x.TaskmatoId,
@@ -47,22 +47,42 @@ namespace Taskmato_2.Controllers
             return View(CurrDTO);
         }
 
-        public ActionResult Details(int? id)
-        {
-            return View();
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost, ActionName("Create")]
-        public ActionResult Create(int taskListId, TaskmatoDTO taskmatoDto)
+        public ActionResult Details(int taskListId, int taskmatoId)
         {
             try
             {
-                var _TaskList = TaskListService.RetrieveTaskList(taskListId);
+                var taskList = TaskListService.RetrieveTaskList(taskListId);
+                var taskmato = taskList.Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId) ?? throw new Exception("Taskmato not found");
+                var dto = new TaskmatoDTO
+                {
+                    TaskListId = taskList.TaskListId,
+                    TaskmatoId = taskmato.TaskmatoId,
+                    Complete = taskmato.Complete,
+                    Details = taskmato.Details,
+                    Name = taskmato.Name,
+                    Pomodoros = taskmato.Pomodoros
+                };
+                return View(dto);
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = e.Message;
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        public ActionResult Create(int taskListId)
+        {
+            var dto = new TaskmatoDTO { TaskListId = taskListId };
+            return View(dto);
+        }
+
+        [HttpPost, ActionName("Create")]
+        public ActionResult Create(TaskmatoDTO taskmatoDto)
+        {
+            try
+            {
+                var user = RetrieveCurrentUser();
                 var NewTaskmato = new Taskmato
                 {
                     Name = taskmatoDto.Name,
@@ -71,20 +91,18 @@ namespace Taskmato_2.Controllers
                     Complete = false
                 };
 
-                _TaskList.AddTaskmato(NewTaskmato);
-
-                if(!TaskmatoService.AddTaskmato(NewTaskmato))
+                if(!TaskListService.AddTaskmatoToTaskListById(taskmatoDto.TaskListId, NewTaskmato))
                 {
                     throw new Exception("Taskmato not created");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["error"] = e.Message;
                 return View(taskmatoDto);
-            }
+            }  
 
-            return RedirectToAction(nameof(Index), taskListId);
+            return RedirectToAction(nameof(Index), new { taskListId = taskmatoDto.TaskListId } );
         }
 
         public ActionResult Edit(int? id)
@@ -103,15 +121,33 @@ namespace Taskmato_2.Controllers
             return View();
         }
 
-        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        public ActionResult Delete(int taskListId, int taskmatoId)
         {
-            return View();
+            var taskList = TaskListService.RetrieveTaskList(taskListId);
+            var taskmato = taskList.Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId) ?? throw new Exception("Taskmato not found");
+            var taskMatoDto = new TaskmatoDTO
+            {
+                TaskListId = taskListId,
+                TaskmatoId = taskmatoId,
+                Name = taskmato.Name,
+                Details = taskmato.Details,
+                Complete = taskmato.Complete,
+                Pomodoros = taskmato.Pomodoros
+            };
+             
+            return View(taskMatoDto);
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
-        {
-            return RedirectToAction(nameof(Index));
+        public ActionResult DeleteConfirmed(int taskListId, int taskmatoId)
+        { 
+
+            var taskList = TaskListService.RetrieveTaskList(taskListId);
+            var taskmato = taskList.Taskmatos.FirstOrDefault(x => x.TaskmatoId == taskmatoId) ?? throw new Exception("Taskmato not found");
+
+            TaskmatoService.DeleteTaskmato(taskmatoId);
+            
+            return RedirectToAction(nameof(Index), new { taskListId = taskListId });
         }
 
         public User RetrieveCurrentUser()

@@ -27,6 +27,15 @@ namespace Taskmato_2.Data.Services
             return Context.SaveChanges() != 0;
         }
 
+        public bool AddTaskmatoToTaskListById(int taskListId, Taskmato taskmato)
+        {
+            var tasklist = TaskLists.FirstOrDefault(x => x.TaskListId == taskListId) ?? throw new Exception("Couldn't find tasklist");
+            tasklist.AddTaskmato(taskmato);
+            TaskLists.Update(tasklist);
+
+            return Context.SaveChanges() != 0;
+        }
+
         public bool DeleteTaskList(int taskListId)
         {
             TaskList TaskListToDelete = TaskLists.FirstOrDefault(x => x.TaskListId == taskListId);

@@ -10,6 +10,7 @@ namespace Taskmato_2.Data.Services
     {
         bool AddTaskList(TaskList taskList);
         bool DeleteTaskList(int taskListId);
+        bool AddTaskmatoToTaskListById(int taskListId, Taskmato taskmato);
         TaskList RetrieveTaskList(int taskListId);
         ICollection<TaskList> RetrieveTaskLists(int userId);
     }

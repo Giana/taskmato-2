@@ -20,9 +20,9 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.TaskmatoId }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.TaskmatoId }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.TaskmatoId })
+                                            <a asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Edit</a>
+                                            <a asp-controller="Taskmato" asp-action="Details" asp-route-taskListId="@Model.TaskListId"  asp-route-taskmatoId="@item.TaskmatoId">Details</a>
+                                            <a asp-controller="Taskmato" asp-action="Delete" asp-route-taskListId="@Model.TaskListId"  asp-route-taskmatoId="@item.TaskmatoId">Delete</a>
                                         </td>
                                     </tr>
                                 }
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md">
                     <div class="container-fluid text-center mb-2">
-                        @Html.ActionLink("Add Task", "Create", "Task", null, new { @class = "btn btn-dark btn-lg pl-4 pr-4" })
+                        <a asp-controller="Taskmato" asp-action="Create" asp-route-taskListId="@Model.TaskListId">Add Task</a>
                     </div>
                 </div>
             </div>
@@ -76,15 +76,9 @@
             <div class="row">
                 <div class="col-xs">
                     <div class="container-fluid">
-                        <a class="btn btn-lg" href="#" role="button">Save</a>
-                        <a class="btn btn-lg" href="#" role="button">Load</a>
+                        <a asp-controller="Account" asp-action="LogOut">Log Out</a>
                     </div>
-                </div>
-                <div class="col-xs">
-                    <div class="container-fluid">
-                        <a class="btn btn-lg" id="options-button" href="#" role="button">Options</a>
-                    </div>
-                </div>
+                </div>s
             </div>
         </div>
     </div>

@@ -48,11 +48,11 @@ namespace Taskmato_2.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult Create(TaskListDTO taskListDto)
         {
-            if(taskListDto.Date.CompareTo(DateTime.Now) < 0)
-            {
-                TempData["dateInPastError"] = "The date cannot be in the past";
-                return View(taskListDto);
-            }
+            //if(taskListDto.Date.CompareTo(DateTime.Now) < 0)
+            //{
+            //    TempData["dateInPastError"] = "The date cannot be in the past";
+            //    return View(taskListDto);
+            //}
 
             try
             {

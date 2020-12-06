@@ -1,4 +1,4 @@
-﻿@model Taskmato_2.Models.Taskmato
+﻿@model Taskmato_2.DTOs.TaskmatoDTO
 
 @{
     ViewBag.Title = "Delete";
@@ -52,15 +52,12 @@
                     <div class="row">
                         <div class="col form-group">
                             <div class="container-fluid text-center mt-2">
-                                @using (Html.BeginForm())
-                                {
-                                    @Html.AntiForgeryToken()
-
-                                    <div class="form-actions no-color">
-                                        <input type="submit" value="Delete" class="btn btn-light btn-lg pl-4 pr-4" />
-                                    </div>
-                                }
-                            </div>
+                                    <form  method="post" asp-controller="Taskmato" asp-action="DeleteConfirmed" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@Model.TaskmatoId">
+                                        <div class="form-actions no-color">
+                                            <input class="btn btn-danger btn-lg pl-4 pr-4" type="submit" value="Delete" />
+                                        </div>
+                                    </form>
+                                </div>
                         </div>
                         <div class="col form-group">
                             <div class="container-fluid text-center my-2">
