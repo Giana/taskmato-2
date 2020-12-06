@@ -11,7 +11,7 @@
     </div>
     <hr />
     <div class="container">
-        <form asp-action="Create" method="post">
+        <form asp-action="Create" asp-route-taskListId="@Model.TaskListId" method="post">
             <div asp-validation-summary="All"></div>
             <div class="row" id="input-row">
                 <div class="col-md mx-3 rounded grey">
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col form-group">
                             <div class="container-fluid text-center my-2">
-                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@Model.TaskListId">Cancel</a>
+                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="Taskmato" asp-action="Index">Cancel</a>
                             </div>
                         </div>
                     </div>

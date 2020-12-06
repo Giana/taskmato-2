@@ -16,7 +16,6 @@ namespace Taskmato_2.DTOs
         [StringLength(100, ErrorMessage = "{0} character limit: 100")]
         public string Name { get; set; }
         [BindProperty]
-        [Required]
         [StringLength(200, ErrorMessage = "{0} character limit: 200")]
         public string Details { get; set; }
         [BindProperty]
