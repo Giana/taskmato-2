@@ -21,13 +21,26 @@
                 </div>
             </div>
             <div class="row" id="button-row">
-                <div class="col-md px-2 py-4 mx-3 my-3 rounded grey">
-                    <div class="container text-center">
-                        <input type="submit" value="Create" class="btn btn-light btn-lg mr-2" />
-                        <a class="btn btn-dark btn-lg ml-2" asp-controller="TaskList" asp-action="Index">Cancel</a>
+                <div class="col px-2 pt-3 pb-2 mx-3 my-3 text-center rounded grey">
+                    <div class="row">
+                        <div class="col">
+                            <h4>Would you like to create this new task list?</h4>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col form-group">
+                            <div class="container text-center">
+                                <input type="submit" value="Create" class="btn btn-light btn-lg mr-2" />
+                            </div>
+                        </div>
+                        <div class="col form-group">
+                            <div class="container text-center">
+                                <a class="btn btn-dark btn-lg ml-2" asp-controller="TaskList" asp-action="Index">Cancel</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 </div>
