@@ -13,11 +13,24 @@
                         <img class="mb-4 mx-auto logo" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
                         <div class="mb-2 px-2 rounded grey">
                             <table class="table">
-                                @foreach (var item in Model.Taskmatos)
+                                @foreach (var item in Model.Taskmatos.Where(x => x.Complete == false))
                                 {
                                     <tr class="text-center">
                                         <td>
                                             <a onclick="displayCurrentTask('@item.Name')">@Html.DisplayFor(modelItem => item.Name)</a>
+                                        </td>
+                                        <td>
+                                            <a class="mx-1" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Edit</a>
+                                            <a class="mx-1" asp-controller="Taskmato" asp-action="Details" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Details</a>
+                                            <a class="mx-1" asp-controller="Taskmato" asp-action="Delete" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                                @foreach (var item in Model.Taskmatos.Where(x => x.Complete == true))
+                                {
+                                    <tr class="text-center text-success">
+                                        <td>
+                                            <a>@Html.DisplayFor(modelItem => item.Name) &#10003;</a>
                                         </td>
                                         <td>
                                             <a class="mx-1" asp-controller="Taskmato" asp-action="Edit" asp-route-taskListId="@Model.TaskListId" asp-route-taskmatoId="@item.TaskmatoId">Edit</a>

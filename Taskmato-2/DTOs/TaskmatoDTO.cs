@@ -8,7 +8,7 @@ namespace Taskmato_2.DTOs
         public int TaskmatoId { get; set; }
         public int TaskListId { get; set; }
         [BindProperty]
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         [StringLength(100, ErrorMessage = "{0} character limit: 100 characters")]
         public string Name { get; set; }
         [BindProperty]

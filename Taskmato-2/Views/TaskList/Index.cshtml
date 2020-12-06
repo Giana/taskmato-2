@@ -20,8 +20,8 @@
                                             <label>@item.Date.ToString("MM-dd-yyyy")</label>
                                         </td>
                                         <td>
-                                            <a class="btn btn-light mr-2" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@item.TaskListId">Open</a>
-                                            <a class="btn btn-dark ml-2" asp-controller="TaskList" asp-action="Delete" asp-route-taskListId="@item.TaskListId">Delete</a>
+                                            <a class="mr-2" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@item.TaskListId">Open</a>
+                                            <a class="ml-2" asp-controller="TaskList" asp-action="Delete" asp-route-taskListId="@item.TaskListId">Delete</a>
                                         </td>
                                     </tr>
                                 }

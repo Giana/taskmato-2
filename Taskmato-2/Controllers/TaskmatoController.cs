@@ -145,8 +145,6 @@ namespace Taskmato_2.Controllers
                 taskmato.Complete = taskmatoDto.Complete;
 
                 _taskmatoService.UpdateTaskmato(taskmatoId, taskmato);
-
-                TempData["success"] = "Taskmato updated!";
             }
             catch(Exception e)
             {

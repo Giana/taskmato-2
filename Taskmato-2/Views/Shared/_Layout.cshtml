@@ -10,6 +10,7 @@
         @Scripts.Render("~/bundles/modernizr")*@
     <script src="~/js/timer.js"></script>
     <script src="~/js/current-task.js"></script>
+    <script src="~/js/credits.js"></script>
 
     <style>
         a:hover {
@@ -69,16 +70,11 @@
                 @TempData["error"].ToString()
             </div>
         }
-        else if (TempData["success"] != null)
-        {
-            <div class="alert alert-success" role="alert">
-                @TempData["success"].ToString()
-            </div>
-        }
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Taskmato</p>
+            <p>&copy; @DateTime.Now.Year - Taskmato - <a onclick="displayCredits()">Credits</a></p>
+            <p id="credits" style="visibility:hidden;">GitHub: Giana, sammo979, and sfhonomichl - Created my logo at <a href="https://logomakr.com">LogoMakr.com</a></p>
         </footer>
     </div>
 
