@@ -4,52 +4,32 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
 <div class="form-horizontal">
     <div class="text-center">
-        <img class="mb-4 logo-sm" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
-        <h4>Create Task</h4>
+        <img class="mb-4 logo-sm" src="~/images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+        <h4>Create Task List</h4>
     </div>
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="container">
         <form asp-action="Create" method="post">
             <div asp-validation-summary="All"></div>
             <div class="row" id="input-row">
-                <div class="col-md mx-3 rounded grey">
-                    <div class="row">
-                        <div class="col form-group text-center">
-                            <label class="sr-only" asp-for="Date"></label>
-                            <input class="form-control" asp-for="Date" asp-format="{0:MM/dd/yyyy}" />
-                            <span asp-validation-for="Date" class="text-danger"></span>
-                        </div>
-                    </div>
+                <div class="col-md form-group text-center justify-content-center mx-3 py-4 rounded grey">
+                    <p><strong>@Html.DisplayNameFor(model => model.Date)</strong></p>
+                    <input class="form-control text-center mx-auto pb-3" asp-for="Date" asp-format="{0:MM/dd/yyyy}" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
             </div>
             <div class="row" id="button-row">
-                <div class="col-md px-2 pt-3 mx-3 my-3 rounded grey">
-                    <div class="row">
-                        <div class="col form-group">
-                            <div class="container-fluid text-center mt-2">
-                                <input type="submit" value="Create" class="btn btn-light btn-lg pl-4 pr-4" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col form-group">
-                            <div class="container-fluid text-center my-2">
-                                <a class="btn btn-dark btn-lg pl-4 pr-4" asp-controller="TaskList" asp-action="Index">Cancel</a>
-                            </div>
-                        </div>
+                <div class="col-md px-2 py-4 mx-3 my-3 rounded grey">
+                    <div class="container text-center">
+                        <input type="submit" value="Create" class="btn btn-light btn-lg mr-2" />
+                        <a class="btn btn-dark btn-lg ml-2" asp-controller="TaskList" asp-action="Index">Cancel</a>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
-}
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

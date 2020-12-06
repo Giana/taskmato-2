@@ -10,18 +10,18 @@
             <div class="row">
                 <div class="col-md">
                     <div class="container-fluid">
-                        <img class="mb-4 mx-auto logo" src="~/Images/TaskmatoLogoTransparent.png" alt="Taskmato" />
+                        <img class="mb-4 mx-auto logo" src="~/images/TaskmatoLogoTransparent.png" alt="Taskmato" />
                         <div class="mb-2 px-2 rounded grey">
                             <table class="table">
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                    <tr class="text-center">
                                         <td>
                                             <label>@item.Date.ToString("MM-dd-yyyy")</label>
                                         </td>
                                         <td>
-                                            <a class="btn btn-outline-light" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@item.TaskListId">Open</a>
-                                            <a class="btn btn-outline-light" asp-controller="TaskList" asp-action="Delete" asp-route-taskListId="@item.TaskListId">Delete</a>
+                                            <a class="btn btn-light mr-2" asp-controller="Taskmato" asp-action="Index" asp-route-taskListId="@item.TaskListId">Open</a>
+                                            <a class="btn btn-dark ml-2" asp-controller="TaskList" asp-action="Delete" asp-route-taskListId="@item.TaskListId">Delete</a>
                                         </td>
                                     </tr>
                                 }
@@ -43,38 +43,28 @@
             <div class="row">
                 <div class="col-md">
                     <div class="container-fluid rounded text-center mb-3 pomodoro-timer-box">
-                        <h1 class="display-4 pt-4" id="timer">00:00</h1>
+                        <h1 class="display-4 pt-4">Welcome!</h1>
                         <hr class="my-4">
                         <div class="pb-4">
-                            <a class="btn btn-light btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="runTimer(60 * 25)">Pomodoro</a>
-                            <a class="btn btn-dark btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="runTimer(60 * 5)">Short Break</a>
-                            <a class="btn btn-light btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="resetTimer()">Reset</a>
-                            <a class="btn btn-dark btn-lg px-5 my-1 custom-btn" href="#" role="button" onclick="runTimer(60 * 15)">Long Break</a>
+                            <p>Please select a task list to view, or create a new one.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md">
-                    <div class="container-fluid rounded pt-4 pb-4 date-box">
-                        <div class="display-4 text-center">
-                            <h1 id="date">@DateTime.Now.ToString("MM/dd/yyyy")</h1>
+                    <div class="container-fluid rounded pt-4 pb-4 text-center date-box">
+                        <div class="display-4">
+                            <h1>Today's Date</h1>
                         </div>
                         <hr class="my-4">
-                        <div class="row">
-                            <div class="col-xs mr-auto ml-2">
-                                <a class="btn btn-lg btn-outline-dark" id="left-button" href="#" role="button"><</a>
-                            </div>
-                            <div class="col-xs ml-auto mr-2">
-                                <a class="btn btn-lg btn-outline-dark" id="right-button" href="#" role="button">></a>
-                            </div>
-                        </div>
+                        <h2 id="date">@DateTime.Now.ToString("MM/dd/yyyy")</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs">
-                    <div class="container-fluid">
+                <div class="col text-right">
+                    <div class="container">
                         <a asp-controller="Account" asp-action="LogOut">Log Out</a>
                     </div>
                 </div>

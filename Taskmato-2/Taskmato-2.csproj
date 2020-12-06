@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Documentation\" />
-    <Folder Include="Images\" />
   </ItemGroup>
 
   <ItemGroup>
